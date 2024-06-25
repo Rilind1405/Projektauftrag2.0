@@ -1,28 +1,23 @@
 package ch;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
 
-public class App {
+public class App extends Application {
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("primary.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setTitle("Tischreservierung");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void main(String[] args) {
-        List<Reservierung> reservierungen = new ArrayList<>();
-
-        
-        reservierungen.add(new Reservierung(new Kunde("Max Mustermann", "0123456789"), LocalDateTime.now()));
-        reservierungen.add(new Reservierung(new Kunde("Erika Mustermann", "0987654321"), LocalDateTime.now().plusDays(1)));
-
-        
-        for (Reservierung reservierung : reservierungen) {
-            System.out.println(reservierung);
-        }
-
-        
-        String suchName = "Max Mustermann";
-        for (Reservierung reservierung : reservierungen) {
-            if (reservierung.getKunde().getName().equals(suchName)) {
-                System.out.println("Gefundene Reservierung: " + reservierung);
-            }
-        }
+        launch();
     }
 }
